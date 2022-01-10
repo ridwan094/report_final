@@ -1,0 +1,10 @@
+#webserver
+10.183.133.30 ansible_user=ubuntu
+#apps
+10.183.133.25 ansible_user=ubuntu
+#db
+10.183.133.18 ansible_user=ubuntu
+#CI/CD
+10.183.133.86 ansible_user=ubuntu
+#Monitoring
+10.183.133.231 ansible_user=ubuntu

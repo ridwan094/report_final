@@ -1,0 +1,57 @@
+---
+- name: Setup Backend
+  hosts: 10.183.133.18
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+
+    - name: Remove current apps
+      shell: "sudo rm -r dumbflix-backend"
+      args:
+        executable: /bin/bash
+
+    - name: Clone Backend Apps
+      shell: "git clone https://github.com/ridwan094/dumbflix-backend.git"
+      args:
+        executable: /bin/bash
+
+    - name: Install python-pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Pip install docker
+      shell: pip install docker
+      args:
+        executable: /bin/bash
+
+    - name: Log into Dockerhub
+      community.docker.docker_login:
+        username: rainover922
+        password: nabilah@12
+
+    - name: Docker pull backend
+      shell: docker pull rainover922/backend:1.0
+      args:
+        executable: /bin/bash
+
+    - name: Docker pull MySQL 5.7
+      shell: docker pull mysql:5.7
+      args:
+        executable: /bin/bash
+
+    - name: Copying Dockerfile backend
+      copy:
+        src: backend/Dockerfile
+        dest: /home/ubuntu/dumbflix-backend
+
+    - name: Copying docker-compose backend
+      copy:
+        src: backend/docker-compose.yml
+        dest: /home/ubuntu/dumbflix-backend

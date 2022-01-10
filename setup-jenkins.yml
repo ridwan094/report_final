@@ -1,0 +1,19 @@
+---
+- name: Setup CI/CD Jenkins Docker
+  hosts: 10.183.133.86
+  become: true
+  tasks:
+    - name: Copy Docker compose
+      copy:
+        src: docker-jenkins/docker-compose.yml
+        dest: /home/ubuntu/
+
+    # - name: Initialize data
+    #   shell: cd docker-node-exporter
+    #   args:
+    #     executable: /bin/bash
+
+    - name: Run docker compose
+      shell: "docker-compose up -d"
+      args:
+        executable: /bin/bash

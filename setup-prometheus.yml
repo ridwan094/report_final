@@ -1,0 +1,72 @@
+---
+- name: Setup node exporter
+  hosts: 10.183.133.231
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+
+    - name: Downloading Prometheus
+      shell: "wget https://github.com/prometheus/prometheus/releases/download/v2.31.1/prometheus-2.31.1.linux-amd64.tar.gz"
+      args:
+        executable: /bin/bash
+
+    - name: Extracting Prometheus
+      shell: "tar xvf prometheus-2.31.1.linux-amd64.tar.gz"
+      args:
+        executable: /bin/bash
+
+    - name: Moving prometheus & promtool to /usr/local/bin
+      shell: sudo mv prometheus-2.31.1.linux-amd64/prometheus prometheus-2.31.1.linux-amd64/promtool /usr/local/bin
+      args:
+        executable: /bin/bash
+
+    - name: Mkdir prometheus
+      shell: sudi mkdir /etc/prometheus /var/lib/prometheus
+      args:
+        executable: /bin/bash
+
+    - name: Copying consoles and consoles_libraries to /etc/prometheus
+      shell: sudo mv prometheus-2.31.1.linux-amd64/consoles prometheus-2.31.1.linux-amd64/console_libraries /etc/prometheus
+      args:
+        executable: /bin/bash
+
+    - name: Copying prometheus.yml
+      copy:
+        src: files/prometheus.yml
+        dest: /etc/prometheus/
+
+    - name: Add user prometheus
+      shell: sudo useradd -rs /bin/false prometheus
+      args:
+        executable: /bin/bash
+
+    - name: Change permission prometheus
+      shell: "sudo chown -R prometheus:prometheus /etc/prometheus /var/lib/prometheus"
+      args:
+        executable: /bin/bash
+
+    - name: Copying prometheus.service
+      copy:
+        src: files/prometheus.service
+        dest: /etc/systemd/system/
+
+    - name: Daemon-reload
+      shell: sudo systemctl daemon-reload
+      args:
+        executable: /bin/bash
+
+    - name: Enable prometheus service
+      shell: sudo systemctl enable prometheus
+      args:
+        executable: /bin/bash
+    
+    - name: Start prometheus
+      shell: sudo systemctl start prometheus
+      args:
+        executable: /bin/bash

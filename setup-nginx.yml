@@ -1,0 +1,17 @@
+---
+- name: Setup Nginx
+  hosts: 10.183.133.30
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes

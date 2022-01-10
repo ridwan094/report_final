@@ -1,0 +1,32 @@
+---
+- name: Setup let's encrypt
+  hosts: 10.183.133.30
+  become: true
+  tasks:
+    - name: Update system
+      apt:
+        update_cache: yes
+
+    - name: Upgrade system
+      apt:
+        upgrade: dist
+
+    - name: Install snap core certbort
+      shell: sudo snap install core; sudo snap refresh core
+      args:
+        executable: /bin/bash
+
+    - name: Install certbot
+      shell: sudo snap install --classic certbot
+      args:
+        executable: /bin/bash
+
+    - name: setup link certbot /snap/bin/certbot /usr/bin/certbot
+      shell: sudo ln -s /snap/bin/certbot /usr/bin/certbot
+      args:
+        executable: /bin/bash
+
+    - name: Install pyhton3 certbot nginx
+      shell: sudo apt-get install certbot python3-certbot-nginx python3-certbot-dns-cloudflare
+      args:
+        executable: /bin/bash
