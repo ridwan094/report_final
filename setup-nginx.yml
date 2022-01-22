@@ -1,6 +1,6 @@
 ---
 - name: Setup Nginx
-  hosts: 10.183.133.30
+  hosts: 10.183.133.93
   become: true
   tasks:
     - name: Update system

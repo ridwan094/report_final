@@ -1,4 +1,5 @@
-version: "3.9"
+---
+version: '3.9'
 services:
   node_exporter:
     image: prom/node-exporter:latest

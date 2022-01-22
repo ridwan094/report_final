@@ -1,10 +1,10 @@
-#webserver
-10.183.133.30 ansible_user=ubuntu
+[all]
+10.183.133.93 ansible_user=ridwan ansible_sudo_password=$6$.XkfhKDEydl$2tfOZrTysu8MQlARcSESblCLYOb4UvGbRPxQapcvK2r5ey3sWC6jzOLWZ2L.WiPvXn4B8q4NSDfamQHyIGEPK.
 #apps
-10.183.133.25 ansible_user=ubuntu
+10.183.133.105 ansible_user=ridwan ansible_sudo_password=$6$.XkfhKDEydl$2tfOZrTysu8MQlARcSESblCLYOb4UvGbRPxQapcvK2r5ey3sWC6jzOLWZ2L.WiPvXn4B8q4NSDfamQHyIGEPK.
 #db
-10.183.133.18 ansible_user=ubuntu
+10.183.133.45 ansible_user=ridwan ansible_sudo_password=$6$.XkfhKDEydl$2tfOZrTysu8MQlARcSESblCLYOb4UvGbRPxQapcvK2r5ey3sWC6jzOLWZ2L.WiPvXn4B8q4NSDfamQHyIGEPK.
 #CI/CD
-10.183.133.86 ansible_user=ubuntu
+10.183.133.14 ansible_user=ridwan ansible_sudo_password=$6$.XkfhKDEydl$2tfOZrTysu8MQlARcSESblCLYOb4UvGbRPxQapcvK2r5ey3sWC6jzOLWZ2L.WiPvXn4B8q4NSDfamQHyIGEPK.
 #Monitoring
-10.183.133.231 ansible_user=ubuntu
+10.183.133.49 ansible_user=ridwan ansible_sudo_password=$6$.XkfhKDEydl$2tfOZrTysu8MQlARcSESblCLYOb4UvGbRPxQapcvK2r5ey3sWC6jzOLWZ2L.WiPvXn4B8q4NSDfamQHyIGEPK.

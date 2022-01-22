@@ -1,17 +1,12 @@
 ---
-- name: Check Ansible
+- name: Update & Upgrade system
   hosts: all
   become: true
   tasks:
     - name: Update system
-    - apt:
+      apt:
         update_cache: yes
-    
-    - name: upgrade system
+
+    - name: Upgrade system
       apt:
         upgrade: dist
-  
-    - name: Check Ansible host
-      shell: "ansible all -m ping"
-      args:
-        executable: /bin/bash

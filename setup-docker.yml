@@ -2,11 +2,13 @@
 - name: Setup Docker & Docker Compose
   hosts: all
   become: true
+  vars_files:
+    - vars/create_user_vars.yml
   tasks:
     - name: Update system
       apt:
         update_cache: yes
-
+    
     - name: Upgrade system
       apt:
         upgrade: dist
@@ -47,5 +49,10 @@
 
     - name: Apply executable permission to the binary
       shell: "sudo chmod +x /usr/local/bin/docker-compose"
+      args:
+        executable: /bin/bash
+
+    - name: Remove sudo on docker command
+      shell: sudo usermod -aG docker {{username}}
       args:
         executable: /bin/bash

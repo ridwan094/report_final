@@ -1,29 +1,16 @@
 ---
 - name: Installing node exporter
   hosts: all
+  vars_files:
+    - vars/create_user_vars.yml
   become: true
   tasks:
     - name: Copying docker compose file
       copy:
         src: docker-node-exporter
-        dest: /home/ubuntu/
-
-    # - name: Stop container
-    #   shell: "docker stop node_exporter"
-    #   args:
-    #     executable: /bin/bash
-
-    # - name: Remove container
-    #   shell: "docker rm node_exporter"
-    #   args:
-    #     executable: /bin/bash
-
-    - name: Docker pull node exporter
-      shell: docker pull prom/node-exporter:latest
-      args:
-        executable: /bin/bash
+        dest: /home/{{username}}/
 
     - name: Run docker compose
       shell:
-        cmd: "docker-compose -f docker-compose.yml up -d"
-        chdir: /home/ubuntu/docker-node-exporter/
+        cmd: "docker-compose -f docker-compose.yml up -d "
+        chdir: /home/{{username}}/docker-node-exporter/
